@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GeekShopping.ProductsApi.Data.ValueObjects
 {
-    public class ProductVO
+    public class ProductDto
     {
         public long Id { get; set; }
         public string Name { get; set; }

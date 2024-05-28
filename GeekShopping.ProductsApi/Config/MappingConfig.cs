@@ -10,8 +10,8 @@ namespace GeekShopping.ProductsApi.Config
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<ProductVO, Product>();
-                config.CreateMap<Product, ProductVO>();
+                config.CreateMap<ProductDto, Product>();
+                config.CreateMap<Product, ProductDto>();
             });
 
             return mappingConfig;
