@@ -1,3 +1,5 @@
+using AutoMapper;
+using GeekShopping.ProductsApi.Config;
 using GeekShopping.ProductsApi.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -12,6 +14,10 @@ builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(
     connection,
     new MySqlServerVersion(new Version(8, 0, 29)))
 );
+
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddControllers();
 
