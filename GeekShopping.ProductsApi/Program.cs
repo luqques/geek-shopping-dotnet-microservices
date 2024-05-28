@@ -2,6 +2,8 @@ using AutoMapper;
 using GeekShopping.ProductsApi.Config;
 using GeekShopping.ProductsApi.Model.Context;
 using GeekShopping.ProductsApi.Repository;
+using GeekShopping.Web.Services;
+using GeekShopping.Web.Services.IServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -21,6 +23,10 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddMvc();
+
+builder.Services.AddHttpClient<IProductService, ProductService>(c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"]));
 
 builder.Services.AddControllers();
 
