@@ -11,9 +11,9 @@ namespace GeekShopping.IdentityServer.Configuration
         public static IEnumerable<IdentityResource> IdentityResources =>
             new List<IdentityResource>
             {
-                new IdentityResource.OpenId(),
-                new IdentityResource.Email(),
-                new IdentityResource.Profile(),
+                new IdentityResources.OpenId(),
+                new IdentityResources.Email(),
+                new IdentityResources.Profile(),
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
