@@ -26,7 +26,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddMvc();
 
-builder.Services.AddHttpClient<IProductService, ProductService>(c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductAPI"]));
+builder.Services.AddHttpClient<IProductService, ProductService>(c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ProductApi"]));
 
 builder.Services.AddControllers();
 
