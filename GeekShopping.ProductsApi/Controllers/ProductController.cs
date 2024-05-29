@@ -34,7 +34,7 @@ namespace GeekShopping.ProductsApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductDto>> Create(ProductDto productDto)
+        public async Task<ActionResult<ProductDto>> Create([FromBody] ProductDto productDto)
         {
             if (productDto is null)
                 return BadRequest();
@@ -45,7 +45,7 @@ namespace GeekShopping.ProductsApi.Controllers
 
 
         [HttpPut]
-        public async Task<ActionResult<ProductDto>> Update(ProductDto productDto)
+        public async Task<ActionResult<ProductDto>> Update([FromBody] ProductDto productDto)
         {
             if (productDto is null)
                 return BadRequest();
