@@ -24,6 +24,7 @@ namespace GeekShopping.IdentityServer.Configuration
                 new ApiScope(name: "read", "Read data."),
                 new ApiScope(name: "write", "Write data."),
                 new ApiScope(name: "delete", "Delete data."),
+                //new ApiScope(name: "identityserverapi", displayName: "manage identityserver api endpoints.")
             };
 
         public static IEnumerable<Client> Clients =>
