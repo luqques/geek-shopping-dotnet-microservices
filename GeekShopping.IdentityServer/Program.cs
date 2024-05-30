@@ -1,4 +1,5 @@
 using GeekShopping.IdentityServer.Configuration;
+using GeekShopping.IdentityServer.Initializer;
 using GeekShopping.IdentityServer.Model;
 using GeekShopping.IdentityServer.Model.Context;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connection = builder.Configuration["MySqlConnection:MySqlConnectionString"];
 
+// Add services to the container.
 builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(
     connection,
     new MySqlServerVersion(new Version(8, 0, 2)))
@@ -30,8 +32,8 @@ builder.Services.AddIdentityServer(options =>
   .AddAspNetIdentity<ApplicationUser>()
   .AddDeveloperSigningCredential();
 
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
