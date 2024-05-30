@@ -38,6 +38,8 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+var dbInitializeService = app.Services.CreateScope().ServiceProvider.GetService<IDbInitializer>();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -53,6 +55,8 @@ app.UseRouting();
 app.UseIdentityServer();
 
 app.UseAuthorization();
+
+dbInitializeService.Initialize();
 
 app.MapControllerRoute(
     name: "default",
