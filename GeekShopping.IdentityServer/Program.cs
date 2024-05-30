@@ -1,4 +1,14 @@
+using GeekShopping.IdentityServer.Model.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connection = builder.Configuration["MySqlConnection:MySqlConnectionString"];
+
+builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(
+    connection,
+    new MySqlServerVersion(new Version(8, 0, 2)))
+);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
