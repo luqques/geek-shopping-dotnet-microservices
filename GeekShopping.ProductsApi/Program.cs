@@ -30,7 +30,7 @@ builder.Services.AddHttpClient<IProductService, ProductService>(c => c.BaseAddre
 
 builder.Services.AddControllers();
 
-builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
+builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
 {
     options.Authority = "https://localhost:4435/";
     options.TokenValidationParameters = new TokenValidationParameters
