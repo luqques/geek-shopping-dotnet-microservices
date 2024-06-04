@@ -259,6 +259,12 @@ namespace IdentityServerHost.Quickstart.UI
         [HttpGet]
         public async Task<IActionResult> Register(string returnUrl)
         {
+            List<string> roles = new List<string>();
+            roles.Add("Admin");
+            roles.Add("Client");
+            ViewBag.message = roles;
+            ViewData["ReturnUrl"] = returnUrl;
+
             // build a model so we know what to show on the reg page
             var vm = await BuildRegisterViewModelAsync(returnUrl);
 
@@ -268,7 +274,7 @@ namespace IdentityServerHost.Quickstart.UI
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model, string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
@@ -311,6 +317,11 @@ namespace IdentityServerHost.Quickstart.UI
                     var loginresult = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, lockoutOnFailure: true);
                     if (loginresult.Succeeded)
                     {
+                        //List<string> roles = new List<string>();
+                        //roles.Add("Admin");
+                        //roles.Add("Client");
+                        //ViewBag.message = roles;
+
                         var checkuser = await _userManager.FindByNameAsync(model.Username);
                         await _events.RaiseAsync(new UserLoginSuccessEvent(checkuser.UserName, checkuser.Id, checkuser.UserName, clientId: context?.Client.ClientId));
 
@@ -357,6 +368,7 @@ namespace IdentityServerHost.Quickstart.UI
             roles.Add("Admin");
             roles.Add("Client");
             ViewBag.message = roles;
+
             if (context?.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
             {
                 var local = context.IdP == IdentityServerConstants.LocalIdentityProvider;
